@@ -21,14 +21,14 @@ class _SupplementFormState extends State<SupplementForm> {
   String? amountError;
 
   String? validateName(String? value) {
-    if (value == null || value.isEmpty) {
+    if (value == null || value.trim().isEmpty) {
       return 'Please enter a name.';
     }
     return null;
   }
 
   String? validateAmount(String? value) {
-    if (value == null || value == "") {
+    if (value == null || value.trim().isEmpty) {
       return 'Please enter an amount.';
     }
     return null;
@@ -59,7 +59,7 @@ class _SupplementFormState extends State<SupplementForm> {
               nameError = validateName(supplementController.text);
               amountError = validateAmount(amountController.text);
               setState(() {
-                supp.naziv = supplementController.text;
+                supp.naziv = supplementController.text.trim();
                 supp.activityType = "Suplement";
 
                 if (nameError != null || amountError != null)
@@ -69,6 +69,7 @@ class _SupplementFormState extends State<SupplementForm> {
               });
             },
             controller: supplementController,
+            textInputAction: TextInputAction.next,
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(25.0),
@@ -105,15 +106,13 @@ class _SupplementFormState extends State<SupplementForm> {
           height: 55,
           child: TextField(
             onChanged: (value) {
-              nameError = validateName(supplementController.text);
-              amountError = validateAmount(amountController.text);
-
               setState(() {
-                supp.kolicina = (int.parse(amountController.text) as num).toDouble();
+                amountController.text != "" ?  supp.kolicina = (int.parse(amountController.text) as num).toDouble() : "";
                 supp.activityType = "Suplement";
                 widget.onChanged(supp);
-                print(nameError);
-                print(amountError);
+
+                nameError = validateName(supplementController.text);
+                amountError = validateAmount(amountController.text);
 
                 if (nameError != null || amountError != null)
                   widget.onChanged(null);

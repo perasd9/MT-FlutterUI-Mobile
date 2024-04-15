@@ -29,14 +29,14 @@ class _TrainingFormState extends State<TrainingForm> {
   String? weightError;
 
   String? validateNumberSeries(String? value) {
-    if (value == null || value.isEmpty) {
+    if (value == null || value.trim().isEmpty) {
       return 'Please enter a number.';
     }
     return null;
   }
 
   String? validateWeight(String? value) {
-    if (value == null || value.isEmpty) {
+    if (value == null || value.trim().isEmpty) {
       return 'Please enter a weight.';
     }
     return null;
@@ -151,6 +151,7 @@ class _TrainingFormState extends State<TrainingForm> {
               });
             },
             controller: numberSeriesController,
+            textInputAction: TextInputAction.next,
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(25.0),
@@ -191,14 +192,18 @@ class _TrainingFormState extends State<TrainingForm> {
           height: 55,
           child: TextField(
             onChanged: (value) {
+
               setState(() {
-                training.kilaza = (int.parse(kilogramsController.text) as num).toDouble();
+                kilogramsController.text != "" ? training.kilaza = (int.tryParse(kilogramsController.text) ?? "" as num).toDouble() : "";
                 training.activityType = "Teretana";
+                numberSeriesError = validateNumberSeries(numberSeriesController.text);
+                weightError = validateWeight(kilogramsController.text);
                 if (numberSeriesError != null || weightError != null)
                   widget.onChanged(null);
                 else
                   widget.onChanged(training);
               });
+
             },
             controller: kilogramsController,
             decoration: InputDecoration(

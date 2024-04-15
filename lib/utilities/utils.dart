@@ -6,26 +6,23 @@ import 'package:mt_activity_management/main.dart';
 import 'package:mt_activity_management/model/activity.dart';
 import 'package:mt_activity_management/model/member.dart';
 import 'package:mt_activity_management/model/program.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Utils {
-
   //SHOWING TOAST MESSAGE
-  static showToastSnackBar(BuildContext context, String text,
-      Color? backgroundColor, String label) {
+  static showToastSnackBar(
+      BuildContext context, String text, Color? backgroundColor, String label) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
           text,
-          style: const TextStyle(
-              fontFamily: "Raleway",
-              fontSize: 14),
+          style: const TextStyle(fontFamily: "Raleway", fontSize: 14),
         ),
         backgroundColor: backgroundColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
-        margin: const EdgeInsets.only(
-            bottom: 20, left: 40, right: 40),
+        margin: const EdgeInsets.only(bottom: 20, left: 40, right: 40),
         behavior: SnackBarBehavior.floating,
         action: SnackBarAction(
           label: label,
@@ -36,18 +33,29 @@ class Utils {
   }
 
   //GET PROGRAMS API CALLING
-  static Future<List<Program>> getPrograms(DateTime date, {bool private = true}) async {
+  static Future<List<Program>> getPrograms(DateTime date,
+      {bool private = true}) async {
     List<Program> listPrograms = [];
 
     Map<String, String> customHeaders = {
       "content-type": "application/json",
     };
     var data = jsonEncode({
-      "datum": "${DateFormat('yyyy-MM-ddTHH:mm:ssZ').format(date)}Z",
+      "datum": "${DateFormat('yyyy-MM-ddTZ').format(date)}00:00:00Z",
+      "clanId" : (await SharedPreferences.getInstance()).getInt("userId"),
     });
 
-    var response = private ? await http.post(Uri.parse("${MyApp.api}/privateprograms"), headers: customHeaders, body: data,) :
-        await http.post(Uri.parse("${MyApp.api}/programs"), headers: customHeaders, body: data,);
+    var response = private
+        ? await http.post(
+            Uri.parse("${MyApp.api}/privateprograms"),
+            headers: customHeaders,
+            body: data,
+          )
+        : await http.post(
+            Uri.parse("${MyApp.api}/programs"),
+            headers: customHeaders,
+            body: data,
+          );
 
     List<dynamic> jsonList = json.decode(response.body.toString());
 

@@ -12,13 +12,17 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  static String api = "http://192.168.0.168:8000";
+  static String api = "http://192.168.0.115:8000";
 
   @override
   Widget build(BuildContext context){
     return MaterialApp(
-      scrollBehavior: const MaterialScrollBehavior()
-          .copyWith(dragDevices: PointerDeviceKind.values.toSet()),
+      scrollBehavior: ScrollConfiguration.of(context).copyWith(
+        physics: const BouncingScrollPhysics(
+          parent: AlwaysScrollableScrollPhysics(),
+        ),
+      ),
+      debugShowCheckedModeBanner: false,
       title: 'Activity management',
       initialRoute: "/login",
       routes: {

@@ -7,7 +7,6 @@ import 'package:mt_activity_management/components/program_forms/foodForm.dart';
 import 'package:mt_activity_management/components/program_forms/supplementForm.dart';
 import 'package:mt_activity_management/components/program_forms/trainingForm.dart';
 import 'package:mt_activity_management/main.dart';
-import 'package:mt_activity_management/model/exercise.dart';
 import 'package:mt_activity_management/model/food.dart';
 import 'package:mt_activity_management/model/supplement.dart';
 import 'package:mt_activity_management/model/training.dart';
@@ -73,6 +72,7 @@ class _AddProgramDialogState extends State<AddProgramDialog> {
     if(response.statusCode == 201){
             listActivities.clear();
             Navigator.pop(context);
+            Utils.showToastSnackBar(context, "Program is created successfully.", Colors.green, 'OK');
     }
   }
 
@@ -92,6 +92,7 @@ class _AddProgramDialogState extends State<AddProgramDialog> {
 
   @override
   Widget build(BuildContext context) {
+
     return AlertDialog(
       title: const Text("Adding Program",
           textAlign: TextAlign.center,
@@ -192,6 +193,7 @@ class _AddProgramDialogState extends State<AddProgramDialog> {
                         ),
                         value: isChecked,
                         onChanged: (bool? value) {
+
                           setState(() {
                             isChecked = value!;
                           });
