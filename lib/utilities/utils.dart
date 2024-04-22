@@ -85,4 +85,23 @@ class Utils {
 
     return listPrograms;
   }
+
+  //DELETING PROGRAM
+  static Future<http.Response> deleteProgram(int programId) async {
+    Map<String, String> customHeaders = {
+      "content-type": "application/json",
+    };
+    var data = jsonEncode({
+      "programId" : programId,
+
+    });
+
+    var response = await http.delete(
+      Uri.parse("${MyApp.api}/programs"),
+      headers: customHeaders,
+      body: data,
+    );
+
+    return response;
+  }
 }
