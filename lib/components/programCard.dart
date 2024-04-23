@@ -186,7 +186,7 @@ class ProgramCard extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: 130,
+              height: 120,
               child: SingleChildScrollView(
                 child: ListView.builder(
                   itemCount: program.listaAktivnosti?.length,

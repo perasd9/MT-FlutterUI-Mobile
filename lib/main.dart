@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
           parent: AlwaysScrollableScrollPhysics(),
         ),
       ),
+
       debugShowCheckedModeBanner: false,
       title: 'Activity management',
       initialRoute: "/login",

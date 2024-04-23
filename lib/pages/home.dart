@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mt_activity_management/pages/login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -9,14 +11,43 @@ class Home extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Row(
+        title:  Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Padding(
+            const Padding(
               padding: EdgeInsets.fromLTRB(40.0, 50.0, 0, 0),
               child: Image(
                   image: AssetImage("assets/images/hamburger.png")
               ),
-            )
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 50.0, 20.0, 0),
+
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.0),
+                  color: Colors.white70,
+                ),
+                height: 54,
+                width: 54,
+                child: IconButton(
+                    onPressed: () async {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Login()),
+                            (route) => false,
+                      );
+
+                      (await SharedPreferences.getInstance()).remove("userId");
+
+                    },
+                    icon: const Icon(
+                      Icons.logout,
+                      size: 25,
+                      color: Colors.black,
+                    )),
+              ),
+            ),
           ],
         ),
         toolbarHeight: 100.0,

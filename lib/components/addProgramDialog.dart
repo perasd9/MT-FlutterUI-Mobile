@@ -112,10 +112,10 @@ class _AddProgramDialogState extends State<AddProgramDialog> {
 
     if(response.statusCode == 200){
       Navigator.pop(context);
-      Utils.showToastSnackBar(context, "Successfully updated program", Colors.green, "Updating program");
+      Utils.showToastSnackBar(context, "Successfully updated program", Colors.green, "Ok");
     }else{
       Navigator.pop(context);
-      Utils.showToastSnackBar(context, "Unsuccessfully updated program", Colors.red[400], "Updating program");
+      Utils.showToastSnackBar(context, "Unsuccessfully updated program", Colors.red[400], "Ok");
     }
   }
 
