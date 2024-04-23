@@ -32,6 +32,16 @@ class _LoginState extends State<Login> {
     super.dispose();
   }
 
+  @override
+  void initState() {
+    Future<SharedPreferences> prefs = SharedPreferences.getInstance();
+
+    prefs.then((value) =>{
+      if(value.getInt('userId') != null)
+        Navigator.pushNamed(context, "/home")
+    });
+  }
+
   void saveUserData(String clan) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var json = jsonDecode(clan);

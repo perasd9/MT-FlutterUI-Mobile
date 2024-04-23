@@ -17,8 +17,12 @@ class Activity {
   //supplement
   double? amount;
 
+  //STATE OF ACTIVITY
+  bool? isDeleted = false;
+  bool? isAdded = false;
+
   Activity({this.rb, this.programId, this.program, this.activityType, this.name,
-  this.kcal, this.numberOfSeries, this.weight, this.exerciseId, this.exercise, this.amount});
+  this.kcal, this.numberOfSeries, this.weight, this.exerciseId, this.exercise, this.amount, this.isDeleted, this.isAdded});
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
@@ -26,6 +30,8 @@ class Activity {
     if (programId != null) data['programId'] = programId;
     if (program != null) data['program'] = program!.toJson();
     if (activityType != null) data['activityType'] = activityType;
+    data['isDeleted'] = isDeleted;
+    data['isAdded'] = isAdded;
     return data;
   }
 

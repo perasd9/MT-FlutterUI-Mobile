@@ -4,7 +4,7 @@ class Food extends Activity {
   String naziv;
   int brojKalorija;
 
-  Food({super.rb, super.programId, super.activityType, required this.naziv, required this.brojKalorija});
+  Food({super.rb, super.programId, super.activityType, super.isDeleted, super.isAdded, required this.naziv, required this.brojKalorija});
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = super.toJson();

@@ -20,14 +20,14 @@ class _FoodFormState extends State<FoodForm> {
   String? kcalError;
 
   String? validateMeal(String? value) {
-    if (value == null || value.trim().isEmpty) {
+    if (value == null || value.isEmpty) {
       return 'Please enter a name of your meal.';
     }
     return null;
   }
 
   String? validateKcal(String? value) {
-    if (value == null || value.trim().isEmpty) {
+    if (value == null || value.isEmpty) {
       return 'Please enter an amount.';
     }
     return null;
@@ -71,10 +71,9 @@ class _FoodFormState extends State<FoodForm> {
                       fontSize: 16.0, color: Colors.black.withOpacity(0.35)),
                 ),
                 validator: validateMeal,
-                textInputAction: TextInputAction.next,
                 onChanged: (value) {
                   setState(() {
-                    food.naziv = value.trim();
+                    food.naziv = value;
                     food.activityType = "Hrana";
                     if(kcalError != null || mealError != null) widget.onChanged(null);
                     else

@@ -80,7 +80,8 @@ class Utils {
           naziv: json['naziv'],
           datum: DateTime.parse(json['datum']),
           clan: json['Clan'] != null ? Member.fromJson(json['Clan']) : null,
-          listaAktivnosti: activities);
+          listaAktivnosti: activities,
+          public: json['public']);
     }).toList();
 
     return listPrograms;

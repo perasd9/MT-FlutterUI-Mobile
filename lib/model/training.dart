@@ -7,7 +7,7 @@ class Training extends Activity {
   int? vezbaId;
   Exercise vezba;
 
-  Training({super.rb, super.programId, super.activityType, required this.brojSerija,
+  Training({super.rb, super.programId, super.activityType, super.isDeleted, super.isAdded, required this.brojSerija,
     required this.kilaza, this.vezbaId, required this.vezba});
 
 

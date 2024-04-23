@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:mt_activity_management/components/addProgramDialog.dart';
 import 'package:mt_activity_management/model/program.dart';
 import 'package:mt_activity_management/utilities/utils.dart';
 
@@ -74,7 +75,14 @@ class ProgramCard extends StatelessWidget {
                             height: 32,
                             width: 32,
                             child: IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  showDialog(
+                                      context: context,
+                                      useRootNavigator: false,
+                                      builder: (BuildContext context) {
+                                        return AddProgramDialog(program: program,);
+                                      });
+                                },
                                 icon: const Icon(
                                   Icons.edit,
                                   size: 16,

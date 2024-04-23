@@ -4,7 +4,7 @@ class Supplement extends Activity {
   String naziv;
   double kolicina;
 
-  Supplement({super.rb, super.programId, super.activityType, required this.naziv, required this.kolicina});
+  Supplement({super.rb, super.programId, super.activityType, super.isDeleted, super.isAdded, required this.naziv, required this.kolicina});
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = super.toJson();

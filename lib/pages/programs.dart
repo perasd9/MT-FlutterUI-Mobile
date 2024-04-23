@@ -338,7 +338,7 @@ class _ProgramsState extends State<Programs> {
               context: context,
               useRootNavigator: false,
               builder: (BuildContext context) {
-                return const AddProgramDialog();
+                return const AddProgramDialog(program: null,);
               });
         },
         icon: const Icon(
